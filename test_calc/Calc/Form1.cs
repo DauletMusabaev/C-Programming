@@ -120,16 +120,40 @@ namespace Calc
                 case "/":
                     textBoxResult.Text = (res / Double.Parse(textBoxResult.Text)).ToString();
                     break;
+                case "NOD":
+                    textBoxResult.Text = findNod(res, Double.Parse(textBoxResult.Text));
+                    break;
+                case "NOK":
+                    textBoxResult.Text = findNok(res, Double.Parse(textBoxResult.Text));
+                    break;
+                case "x!":
+                    double a = Double.Parse(textBoxResult.Text);
+                    for (int i = 1; i <= a; i++) a *= i;
+                    textBoxResult.Text = a.ToString();
+                    break;
                 default:
                     break;
             }
             res = Double.Parse(textBoxResult.Text);
             label1.Text = "";
         }
-
         private void Label1_Click(object sender, EventArgs e)
         {
 
         }
+
+        private String findNod(double a, double b)
+        {
+            while (a != b)
+            {
+                if (a > b) a -= b;
+                else b -= a;
+            }
+            return a.ToString();
+        }
+        private String findNok(double a, double b) 
+        {
+            return (Math.Abs(a * b) / Double.Parse(findNod(a, b))).ToString();
+        } 
     }
 }
